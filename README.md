@@ -447,10 +447,11 @@ MD Habibur Rahman Jesan
 
 ---
 
+
 ## 🔗 Links
 
-- **Live Demo**: [https://jesan.netlify.app]
-- **GitHub**: [https://github.com/Jesan-Sikder/NUMERICAL-ROOT-FINDER]
+- **Live Demo**: [LINK](https://jesan.netlify.app)
+- **GitHub**: [LINK](https://github.com/Jesan-Sikder/NUMERICAL-ROOT-FINDER)
 - **Documentation**: See theory sections above
 
 ---

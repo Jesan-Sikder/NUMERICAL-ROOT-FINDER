@@ -441,7 +441,8 @@ This project is provided for educational purposes. Feel free to use and modify f
 ## 👨‍🎓 Author
 
 **Undergraduate Numerical Methods Project**
-MD Habibur Rahman Jesan
+
+-MD Habibur Rahman Jesan
 
 
 

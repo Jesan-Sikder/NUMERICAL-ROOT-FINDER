@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Methods - Root Finding Algorithms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🔢 Numerical Methods</h1>
+            <h2>Root Finding Algorithms</h2>
+            <p class="subtitle">Interactive Implementation of Fixed Point Iteration & Newton-Raphson Method</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="intro">
+            <div class="intro-card">
+                <h3>About This Tool</h3>
+                <p>
+                    This web application demonstrates two fundamental numerical methods for finding roots of nonlinear equations:
+                    <strong>Fixed Point Iteration</strong> and the <strong>Newton-Raphson Method</strong>.
+                    Both algorithms are implemented in JavaScript and run entirely in your browser.
+                </p>
+            </div>
+        </section>
+
+        <!-- Input Form -->
+        <section class="input-section">
+            <h3>Solver Configuration</h3>
+            
+            <!-- Method Selection -->
+            <div class="form-group">
+                <label for="method">Select Method:</label>
+                <select id="method" onchange="updateMethodDescription()">
+                    <option value="newton">Newton-Raphson Method</option>
+                    <option value="fixedpoint">Fixed Point Iteration</option>
+                </select>
+            </div>
+
+            <!-- Method Description -->
+            <div id="method-description" class="method-description">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+
+            <!-- Function Input -->
+            <div class="form-group">
+                <label for="function-input" id="function-label">Enter function f(x):</label>
+                <input type="text" id="function-input" placeholder="e.g., x^2 - 4, cos(x) - x, exp(-x) - x">
+                <p class="hint">Use ^ for power, * for multiplication. Supported: sin, cos, tan, exp, log, sqrt, abs</p>
+            </div>
+
+            <!-- Initial Guess -->
+            <div class="form-group">
+                <label for="initial-guess">Initial Guess (x₀):</label>
+                <input type="number" id="initial-guess" value="1" step="0.1">
+            </div>
+
+            <!-- Tolerance -->
+            <div class="form-group">
+                <label for="tolerance">Tolerance (ε):</label>
+                <input type="number" id="tolerance" value="0.000001" step="0.000001">
+            </div>
+
+            <!-- Max Iterations -->
+            <div class="form-group">
+                <label for="max-iterations">Maximum Iterations:</label>
+                <input type="number" id="max-iterations" value="100" min="1" max="1000">
+            </div>
+
+            <!-- Solve Button -->
+            <button onclick="solve()" class="solve-btn">Solve</button>
+
+            <!-- Example Buttons -->
+            <div class="examples">
+                <h4>Quick Examples:</h4>
+                <button onclick="loadExample(1)" class="example-btn">x² - 4 = 0</button>
+                <button onclick="loadExample(2)" class="example-btn">cos(x) - x = 0</button>
+                <button onclick="loadExample(3)" class="example-btn">x³ - x - 2 = 0</button>
+                <button onclick="loadExample(4)" class="example-btn">exp(-x) - x = 0</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section" style="display: none;">
+            <h3>Results</h3>
+            
+            <!-- Summary -->
+            <div id="summary" class="summary">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+
+            <!-- Iteration Table -->
+            <div class="table-container">
+                <h4>Iteration Details</h4>
+                <table id="iteration-table">
+                    <thead>
+                        <tr>
+                            <th>Iteration</th>
+                            <th>x</th>
+                            <th id="col3-header">f(x)</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody id="iteration-tbody">
+                        <!-- Dynamic rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Error Display -->
+        <div id="error-message" class="error-message" style="display: none;">
+            <!-- Error messages will be displayed here -->
+        </div>
+
+        <!-- Theory Section -->
+        <section class="theory-section">
+            <h3>📚 Theory & Background</h3>
+            
+            <div class="theory-card">
+                <h4>Newton-Raphson Method</h4>
+                <p>
+                    The Newton-Raphson method is an iterative algorithm for finding successively better approximations 
+                    to the roots (or zeros) of a real-valued function. Given a function <em>f(x)</em> and its derivative 
+                    <em>f'(x)</em>, the method uses the formula:
+                </p>
+                <div class="formula">
+                    x<sub>n+1</sub> = x<sub>n</sub> - f(x<sub>n</sub>)/f'(x<sub>n</sub>)
+                </div>
+                <p><strong>Key Points:</strong></p>
+                <ul>
+                    <li>Requires the derivative of the function</li>
+                    <li>Quadratic convergence (very fast when close to root)</li>
+                    <li>May fail if derivative is zero or nearly zero</li>
+                    <li>Sensitive to initial guess selection</li>
+                </ul>
+            </div>
+
+            <div class="theory-card">
+                <h4>Fixed Point Iteration</h4>
+                <p>
+                    Fixed Point Iteration finds a solution to <em>x = g(x)</em> by repeatedly applying the function. 
+                    To solve <em>f(x) = 0</em>, we rearrange it into the form <em>x = g(x)</em> and iterate:
+                </p>
+                <div class="formula">
+                    x<sub>n+1</sub> = g(x<sub>n</sub>)
+                </div>
+                <p><strong>Key Points:</strong></p>
+                <ul>
+                    <li>Simpler than Newton-Raphson (no derivative needed)</li>
+                    <li>Converges if |g'(x)| < 1 near the fixed point</li>
+                    <li>Typically linear convergence (slower than Newton-Raphson)</li>
+                    <li>Convergence depends heavily on the choice of g(x)</li>
+                </ul>
+            </div>
+
+            <div class="theory-card">
+                <h4>Convergence Comparison</h4>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Newton-Raphson</th>
+                        <th>Fixed Point Iteration</th>
+                    </tr>
+                    <tr>
+                        <td>Convergence Rate</td>
+                        <td>Quadratic</td>
+                        <td>Linear</td>
+                    </tr>
+                    <tr>
+                        <td>Derivative Required</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Complexity</td>
+                        <td>Higher</td>
+                        <td>Lower</td>
+                    </tr>
+                    <tr>
+                        <td>Convergence Condition</td>
+                        <td>Good initial guess</td>
+                        <td>|g'(x)| < 1</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Undergraduate Numerical Methods Project | Built with HTML, CSS, and JavaScript</p>
+            <p>MD Habibur Rahma Jesan | ID : 241-15-628</p>
+            <p>MD Touhidul Islam Raha | ID : 241-15-708</p>
+            <p>Reshad Bin Alam		  | ID : 241-15-191</p>
+            <p>Dhruba Chowdhury		  | ID : 241-15-329</p>
+            <p>UDOY KRISHNA DEBNATH   | ID : 241-15-853</p>
+            
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

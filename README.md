@@ -443,6 +443,7 @@ This project is provided for educational purposes. Feel free to use and modify f
 **Undergraduate Numerical Methods Project**
 
 Created as a comprehensive learning resource for numerical analysis courses.
+MD Habibur Rahman Jesan
 
 ---
 

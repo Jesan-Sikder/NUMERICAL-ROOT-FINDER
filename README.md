@@ -441,16 +441,16 @@ This project is provided for educational purposes. Feel free to use and modify f
 ## 👨‍🎓 Author
 
 **Undergraduate Numerical Methods Project**
-
-Created as a comprehensive learning resource for numerical analysis courses.
 MD Habibur Rahman Jesan
+
+
 
 ---
 
 ## 🔗 Links
 
-- **Live Demo**: [Deploy to see live version]
-- **GitHub**: [Your repository URL]
+- **Live Demo**: [https://jesan.netlify.app]
+- **GitHub**: [https://github.com/Jesan-Sikder/NUMERICAL-ROOT-FINDER]
 - **Documentation**: See theory sections above
 
 ---
